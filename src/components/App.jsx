@@ -11,17 +11,13 @@ const startContacts = [
   { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
 ];
-const initContact=()=>{
-  const contactsStorage = JSON.parse(localStorage.getItem('contacts'))
-  if (contactsStorage) {
-    return[...contactsStorage]
-  }
-};
+
 function App() {
-  const [contacts, setContacts] = useState(initContact()??[...startContacts]);
+  const [contacts, setContacts] = useState(()=>{return JSON.parse(localStorage.getItem('contacts'))??startContacts});
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
+    console.log('use');
     window.localStorage.setItem('contacts',JSON.stringify(contacts))
   }, [contacts])
 
